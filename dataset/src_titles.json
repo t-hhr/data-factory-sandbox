@@ -1,5 +1,5 @@
 {
-	"name": "SourceDataset_18w",
+	"name": "src_titles",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",

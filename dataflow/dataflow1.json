@@ -6,14 +6,14 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SourceDataset_18w",
+						"referenceName": "src_titles",
 						"type": "DatasetReference"
 					},
 					"name": "titles"
 				},
 				{
 					"dataset": {
-						"referenceName": "DelimitedText1",
+						"referenceName": "src_names",
 						"type": "DatasetReference"
 					},
 					"name": "names"
@@ -25,7 +25,7 @@
 					"name": "Join1"
 				}
 			],
-			"script": "source(output(\n\t\ttconst as string,\n\t\ttitleType as string,\n\t\tprimaryTitle as string,\n\t\toriginalTitle as string,\n\t\tisAdult as string,\n\t\tstartYear as string,\n\t\tendYear as string,\n\t\truntimeMinutes as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false) ~> titles\nsource(output(\n\t\t{nconst\tprimaryName\tbirthYear\tdeathYear\tprimaryProfession\tknownForTitles} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> names\nnames, titles join({nconst\tprimaryName\tbirthYear\tdeathYear\tprimaryProfession\tknownForTitles} == ERROR_FUNCTION(''),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1"
+			"script": "source(output(\n\t\ttconst as string,\n\t\ttitleType as string,\n\t\tprimaryTitle as string,\n\t\toriginalTitle as string,\n\t\tisAdult as string,\n\t\tstartYear as string,\n\t\tendYear as string,\n\t\truntimeMinutes as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> titles\nsource(output(\n\t\tnconst as string,\n\t\tprimaryName as string,\n\t\tbirthYear as string,\n\t\tdeathYear as string,\n\t\tprimaryProfession as string,\n\t\tknownForTitles as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> names\nnames, titles join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1"
 		}
 	}
 }
