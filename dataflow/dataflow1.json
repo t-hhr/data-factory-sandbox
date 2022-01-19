@@ -1,0 +1,31 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SourceDataset_18w",
+						"type": "DatasetReference"
+					},
+					"name": "titles"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "names"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Join1"
+				}
+			],
+			"script": "source(output(\n\t\ttconst as string,\n\t\ttitleType as string,\n\t\tprimaryTitle as string,\n\t\toriginalTitle as string,\n\t\tisAdult as string,\n\t\tstartYear as string,\n\t\tendYear as string,\n\t\truntimeMinutes as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false) ~> titles\nsource(output(\n\t\t{nconst\tprimaryName\tbirthYear\tdeathYear\tprimaryProfession\tknownForTitles} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> names\nnames, titles join({nconst\tprimaryName\tbirthYear\tdeathYear\tprimaryProfession\tknownForTitles} == ERROR_FUNCTION(''),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1"
+		}
+	}
+}
