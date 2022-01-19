@@ -1,0 +1,9 @@
+{
+	"name": "tfdfsndbox1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f608e8d8-c614-45f4-8a4d-3b3faec9e8fd",
+		"tenantId": "c9a6bf1d-bc61-45d3-b4ee-1f9fda09af4d"
+	}
+}
