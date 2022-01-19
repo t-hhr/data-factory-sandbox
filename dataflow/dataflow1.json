@@ -1,0 +1,51 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "src_titles",
+						"type": "DatasetReference"
+					},
+					"name": "titles"
+				},
+				{
+					"dataset": {
+						"referenceName": "src_names",
+						"type": "DatasetReference"
+					},
+					"name": "names"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "splittitles"
+				},
+				{
+					"name": "Flatten1"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "source(output(\n\t\ttconst as string,\n\t\ttitleType as string,\n\t\tprimaryTitle as string,\n\t\toriginalTitle as string,\n\t\tisAdult as string,\n\t\tstartYear as string,\n\t\tendYear as string,\n\t\truntimeMinutes as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> titles\nsource(output(\n\t\tnconst as string,\n\t\tprimaryName as string,\n\t\tbirthYear as string,\n\t\tdeathYear as string,\n\t\tprimaryProfession as string,\n\t\tknownForTitles as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> names\nnames derive(knownForTitles = split(knownForTitles, ',')) ~> splittitles\nsplittitles foldDown(unroll(knownForTitles, knownForTitles),\n\tmapColumn(\n\t\tnconst,\n\t\ttconst = knownForTitles,\n\t\tprimaryName,\n\t\tbirthYear\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1, titles join(Flatten1@tconst == titles@tconst,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 select(mapColumn(\n\t\tnconst,\n\t\ttconst = titles@tconst,\n\t\tactorName = primaryName,\n\t\tactorBirthYear = birthYear,\n\t\tpublished = startYear,\n\t\ttitle = primaryTitle,\n\t\tgenres\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(actorAge = toInteger(published) - toInteger(actorBirthYear)) ~> DerivedColumn1\nDerivedColumn1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}
