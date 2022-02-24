@@ -1,0 +1,19 @@
+{
+	"name": "MetadataDrivenCopyTask_y2o_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedService2",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_y2o_20220224"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "tumbling_one",
+			"table": "MainControlTable_y2o"
+		}
+	}
+}
