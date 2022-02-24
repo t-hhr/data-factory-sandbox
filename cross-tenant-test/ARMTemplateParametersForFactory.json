@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "cross-tenant-test"
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"linkedService1_servicePrincipalKey": {
+			"value": ""
+		},
+		"linkedService2_connectionString": {
+			"value": ""
+		},
+		"linkedService1_properties_typeProperties_servicePrincipalId": {
+			"value": "7cccf0ea-db98-4013-bd40-6be0ff9c3c7d"
+		},
+		"linkedService1_properties_typeProperties_tenant": {
+			"value": "902dc215-4245-421b-9bff-586f2e083207"
+		}
+	}
+}
