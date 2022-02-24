@@ -1,0 +1,9 @@
+{
+	"name": "cross-tenant-test",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "08a7d327-374a-40c6-81e6-a2202cdddc0a",
+		"tenantId": "c9a6bf1d-bc61-45d3-b4ee-1f9fda09af4d"
+	}
+}

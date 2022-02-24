@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_cuu_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedService2",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_cuu_20220224"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "adf_metadata",
+			"table": "MainControlTable_cuu"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
