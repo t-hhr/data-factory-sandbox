@@ -23,6 +23,9 @@
 		"linkedService1_properties_typeProperties_tenant": {
 			"value": "902dc215-4245-421b-9bff-586f2e083207"
 		},
+		"trigger1_properties_typeProperties_scope": {
+			"value": "/subscriptions/5f0fa64e-b1e7-424d-b5dd-7bd23ffb15d7/resourceGroups/linked-server-test/providers/Microsoft.Storage/storageAccounts/dftestrdp"
+		},
 		"containerUri": {
 			"value": ""
 		},
