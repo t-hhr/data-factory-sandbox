@@ -1,0 +1,48 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "addresses.csv",
+				"container": "demo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "John",
+				"type": "String"
+			},
+			{
+				"name": "Doe",
+				"type": "String"
+			},
+			{
+				"name": "120 jefferson st.",
+				"type": "String"
+			},
+			{
+				"name": "Riverside",
+				"type": "String"
+			},
+			{
+				"name": " NJ",
+				"type": "String"
+			},
+			{
+				"name": " 08075",
+				"type": "String"
+			}
+		]
+	}
+}
