@@ -10,7 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "output.csv"
+				"fileName": "peoples_and_states.csv",
+				"folderPath": "out",
+				"container": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
